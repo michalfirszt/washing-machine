@@ -29,7 +29,7 @@ const UsersTable = ({ users }) => {
                         <tr key={index}>
                             <td>{user.firstName}</td>
                             <td>{user.lastName}</td>
-                            <td>{user.roomNUmber}</td>
+                            <td>{user.roomNumber}</td>
                             <td>
                                 <button
                                     className='btn btn-sm btn-danger'
