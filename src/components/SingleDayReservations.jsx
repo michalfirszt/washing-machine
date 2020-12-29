@@ -1,10 +1,14 @@
 import React from 'react';
+import { useSelector } from 'react-redux';
 import { Row, Col, Button } from 'reactstrap';
 import { Field } from 'redux-form';
 import _capitalize from 'lodash/capitalize';
 import TimePickerWrapper from './TimePickerWrapper';
+import SelectUserField from './SelectUserField';
 
 const SingleDayReservations = ({ fields, meta: { error } }) => {
+  const users = useSelector(state => state.user.users);
+
   return [
     <Row key="header">
       <Col>
@@ -18,19 +22,26 @@ const SingleDayReservations = ({ fields, meta: { error } }) => {
           key={`${name}-${index}`}
           className="reservations__single-entry"
         >
-          <Col xs={{ size: 3, offset: 1 }}>
+          <Col xs={{ size: 3, offset: 0 }}>
             <Field
               name={`${name}.start`}
               component={TimePickerWrapper}
             />
           </Col>
-          <Col xs={{ size: 3, offset: 2 }}>
+          <Col xs={{ size: 3, offset: 0 }}>
             <Field
               name={`${name}.end`}
               component={TimePickerWrapper}
             />
           </Col>
-          <Col xs={{ size: 1, offset: 1 }}>
+          <Col xs={{ size: 3, offset: 1 }}>
+            <Field
+              name={`${name}.user`}
+              component={SelectUserField}
+              options={users}
+            />
+          </Col>
+          <Col xs={{ size: 1, offset: 0 }}>
             <Button
               onClick={() => {
                 fields.remove(index);
