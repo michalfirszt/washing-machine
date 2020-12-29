@@ -1,3 +1,4 @@
+import moment from 'moment';
 import { WEEK_DAYS } from '../common/constants';
 
 const validate = values => {
@@ -18,6 +19,16 @@ const validate = values => {
                 if (!entity || !entity.end) {
                     entityErrors.end = 'Can not be empty';
                     dayErrors[entityIndex] = entityErrors;
+                }
+
+                if (entity.start && entity.end) {
+                    if (moment(entity.start).isAfter(entity.end)) {
+                        entityErrors.end = 'End time should be after start time';
+                        dayErrors[entityIndex] = entityErrors;
+                    } else if (!moment(entity.end).isBetween(entity.start, moment(entity.start).add(151, 'minutes'))) {
+                        entityErrors.end = 'Reservation too long';
+                        dayErrors[entityIndex] = entityErrors;
+                    }
                 }
             });
 
