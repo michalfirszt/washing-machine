@@ -12,14 +12,7 @@ import {
 } from '../actions/machine';
 import SingleDayReservations from './SingleDayReservations';
 import './Reservations.scss';
-
-const validate = values => {
-  const errors = {
-    // monday: [{ start: 'must be present' }],
-    //tuesday: { _error: 'error' },
-  };
-  return errors;
-};
+import validate from './validate';
 
 const Reservations = ({
   clearReservations,

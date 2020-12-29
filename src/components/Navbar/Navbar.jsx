@@ -14,7 +14,7 @@ const Navbar = () => {
                 <ul className="navbar-nav">
                     <li className="nav-item">
                         <NavLink className="nav-link" to="/">
-                            Home
+                            Reservations
                         </NavLink>
                     </li>
                     <li className="nav-item">
