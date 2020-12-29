@@ -21,6 +21,11 @@ const validate = values => {
                     dayErrors[entityIndex] = entityErrors;
                 }
 
+                if (!entity || !entity.user) {
+                    entityErrors.user = 'Can not be empty';
+                    dayErrors[entityIndex] = entityErrors;
+                }
+
                 if (entity.start && entity.end) {
                     if (moment(entity.start).isAfter(entity.end)) {
                         entityErrors.end = 'End time should be after start time';
