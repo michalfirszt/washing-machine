@@ -10,6 +10,19 @@ const validate = values => {
 
             values[day].forEach((entity, entityIndex) => {
                 const entityErrors = {};
+                const otherEntities = values[day].filter((item, itemIndex) => {
+                    if (entityIndex !== itemIndex) {
+                        return item;
+                    }
+                });
+                const conflictedEntity = otherEntities.find(item => {
+                    if (
+                        moment(entity.start).isBetween(item.start, item.end) ||
+                        moment(entity.end).isBetween(item.start, item.end)
+                    ) {
+                        return item;
+                    }
+                });
 
                 if (!entity || !entity.start) {
                     entityErrors.start = 'Can not be empty';
@@ -34,6 +47,11 @@ const validate = values => {
                         entityErrors.end = 'Reservation too long';
                         dayErrors[entityIndex] = entityErrors;
                     }
+                }
+
+                if (conflictedEntity) {
+                    entityErrors.start = 'Conflict between two reservations';
+                    dayErrors[entityIndex] = entityErrors;
                 }
             });
 
