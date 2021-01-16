@@ -16,12 +16,7 @@ const validate = values => {
                     }
                 });
                 const conflictedEntity = otherEntities.find(item => {
-                    if (
-                        moment(entity.start).isBetween(item.start, item.end) ||
-                        moment(entity.end).isBetween(item.start, item.end)
-                    ) {
-                        return item;
-                    }
+                    return moment(entity.start).isBetween(item.start, item.end) || moment(entity.end).isBetween(item.start, item.end);
                 });
 
                 if (!entity || !entity.start) {
