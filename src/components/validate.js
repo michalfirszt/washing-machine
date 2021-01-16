@@ -11,9 +11,7 @@ const validate = values => {
             values[day].forEach((entity, entityIndex) => {
                 const entityErrors = {};
                 const otherEntities = values[day].filter((item, itemIndex) => {
-                    if (entityIndex !== itemIndex) {
-                        return item;
-                    }
+                    return entityIndex !== itemIndex;
                 });
                 const conflictedEntity = otherEntities.find(item => {
                     return moment(entity.start).isBetween(item.start, item.end) || moment(entity.end).isBetween(item.start, item.end);
